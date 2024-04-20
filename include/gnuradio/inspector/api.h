@@ -12,6 +12,13 @@
 #define INCLUDED_INSPECTOR_API_H
 
 #include <gnuradio/attributes.h>
+#ifndef __GR_VLA
+#ifdef _MSC_VER
+#define __GR_VLA(TYPE, buf, size) TYPE* buf = (TYPE*)alloca(sizeof(TYPE) * (size))
+#else
+#define __GR_VLA(TYPE, buf, size) TYPE buf[size]
+#endif
+#endif
 
 #ifdef gnuradio_inspector_EXPORTS
 #define INSPECTOR_API __GR_ATTR_EXPORT
